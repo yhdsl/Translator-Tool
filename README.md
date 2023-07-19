@@ -202,3 +202,8 @@ English=中文
 - 规则行无法存在相同的替换规则，即无法对同一内容替换多次，目前暂时没有好的解决方案
 
 ### 使用该脚本的翻译项目
+
+下面是一些使用该脚本进行翻译的项目，可以作为好的参考
+
+- [Huginn-Chinese](https://github.com/yhdsl/Huginn-Chinese)
+
