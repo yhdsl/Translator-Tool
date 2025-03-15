@@ -114,14 +114,20 @@ class RuleFile:
         """
         根据规则对目标文件进行替换
         """
-        print(f"### {str(self.target_path)}")
+        try:
+            print(f"### {str(self.target_path)}")
+        except UnicodeEncodeError:
+            pass
         with self.target_path.open(mode='r', encoding='utf8') as fp1:
             text = ''.join(fp1.readlines())
 
         for rule_name in self.rule_dict:
             rule_value = self.rule_dict[rule_name]
             if rule_name in text:
-                print(f"{rule_name} --> {rule_value}")
+                try:
+                    print(f"{rule_name} --> {rule_value}")
+                except UnicodeEncodeError:
+                    pass
             text = text.replace(rule_name, rule_value, 1)
 
         with self.target_path.open(mode='w+', encoding='utf8') as fp2:
