@@ -199,11 +199,11 @@ English=中文
 
 - 包含规则文件的文件夹中不允许有其他无关文件，在未来可以添加一个跳过错误文件的开关
 - 当前目标文件仅使用`utf-8`进行读取和保存，未来可以设计一个关键字来覆盖
-- 规则行无法存在相同的替换规则，即无法对同一内容替换多次，目前暂时没有好的解决方案
+- ~~规则行无法存在相同的替换规则，即无法对同一内容替换多次，目前暂时没有好的解决方案~~
 
 ### 使用该脚本的翻译项目
 
 下面是一些使用该脚本进行翻译的项目，可以作为好的参考
 
-- [Huginn-Chinese](https://github.com/yhdsl/Huginn-Chinese)
-
+- [PlayniteExtensions](https://github.com/yhdsl/PlayniteExtensions)
+- [TrafficMonitor-Fix](https://github.com/yhdsl/TrafficMonitor-Fix)
