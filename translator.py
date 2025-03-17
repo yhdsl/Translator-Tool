@@ -37,7 +37,7 @@ class RuleFile:
         """
         self.delimiter = '='  # 默认分隔符
 
-        self._metadata_dict, self.rule_dict = self.get_metadata_and_rule(source_path)
+        self._metadata_dict, self.rule_source_list, self.rule_target_list = self.get_metadata_and_rule(source_path)
 
         if TARGET_ROOT_ADDRESS is not None:
             os.chdir(TARGET_ROOT_ADDRESS)
@@ -52,7 +52,7 @@ class RuleFile:
 
         return
 
-    def get_metadata_and_rule(self, path: pathlib.Path):
+    def get_metadata_and_rule(self, path: pathlib.Path) -> tuple[dict[str, str], list[str], list[str]]:
         """
         处理规则文件，
         拆分得到元数据和替换规则
@@ -69,7 +69,8 @@ class RuleFile:
             text_list = fp.readlines()
 
         metadata_dict: dict[str, str] = {}
-        rule_dict: dict[str, str] = {}
+        rule_source_list: list[str] = []
+        rule_target_list: list[str] = []
         metadata_fin = False
         for line in text_list:
             # 清空换行符
@@ -106,9 +107,10 @@ class RuleFile:
             if len(line_rules) == 1:
                 continue
             else:
-                rule_dict[line_rules[0]] = line_rules[1]
+                rule_source_list.append(line_rules[0])
+                rule_target_list.append(line_rules[1])
 
-        return metadata_dict, rule_dict
+        return metadata_dict, rule_source_list, rule_target_list
 
     def target_replace(self):
         """
@@ -121,8 +123,7 @@ class RuleFile:
         with self.target_path.open(mode='r', encoding='utf8') as fp1:
             text = ''.join(fp1.readlines())
 
-        for rule_name in self.rule_dict:
-            rule_value = self.rule_dict[rule_name]
+        for rule_name, rule_value in zip(self.rule_source_list, self.rule_target_list):
             if rule_name in text:
                 try:
                     print(f"{rule_name} --> {rule_value}")
