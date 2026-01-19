@@ -88,9 +88,7 @@ class RuleFile:
                         metadata_name, metadata_value = line[1:].split(self.delimiter, maxsplit=1)
                         metadata_dict[metadata_name] = metadata_value
                     except ValueError:
-                        pass
-                    finally:
-                        continue
+                        print(f"Unknown metadata {line}")
                 else:
                     try:
                         self.delimiter = metadata_dict['DELIMITER']
